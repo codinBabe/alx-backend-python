@@ -14,13 +14,14 @@ def zoom_array(lst: Tuple, factor: int = 2) -> List:
         Defaults to 2.
 
     Returns:
-        Tuple: The zoomed array.
+        List: The zoomed array.
     """
     zoomed_in: List = [
         item for item in lst
         for i in range(factor)
     ]
     return zoomed_in
+
 
 array = (12, 72, 91)
 
