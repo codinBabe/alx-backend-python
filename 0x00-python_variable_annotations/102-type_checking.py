@@ -10,7 +10,8 @@ def zoom_array(lst: Tuple, factor: int = 2) -> List:
 
     Args:
         lst (Tuple): The original array to be zoomed.
-        factor (int, optional): The factor by which to zoom the array. Defaults to 2.
+        factor (int, optional): The factor by which to zoom the array.
+        Defaults to 2.
 
     Returns:
         Tuple: The zoomed array.
