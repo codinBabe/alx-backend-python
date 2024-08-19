@@ -2,16 +2,14 @@
 """ Tasks """
 
 
-import asyncio
-import time
-wait_n = __import__("1-concurrent_coroutines").wait_n
+from typing import List
 wait_random = __import__("0-basic_async_syntax").wait_random
 
 
-async def task_wait_n(n:int, max_delay:int) -> float:
-    """ Task wait n """
-    tasks = [asyncio.create_task(wait_random(max_delay)) for _ in range(n)]
-    start = time.time()
-    await asyncio.gather(*tasks)
-    end = time.time()
-    return (end - start) / n
+async def task_wait_n(n: int, max_delay: int) -> List[float]:
+    """ Wait for a random delay n times """
+    delays = []
+    for _ in range(n):
+        delay = await wait_random(max_delay)
+        delays.append(delay)
+    return delays
