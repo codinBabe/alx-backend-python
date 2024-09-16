@@ -96,7 +96,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         self.assertEqual(test.public_repos("XLICENSE"), [])
         self.assertEqual(test.public_repos(
             "apache-2.0"), self.apache2_repos)
-        self.mock_get.assert_called()
+        self.mock.assert_called()
 
     @classmethod
     def tearDownClass(cls):
