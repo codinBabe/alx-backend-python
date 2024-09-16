@@ -72,13 +72,21 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         """Set up class"""
         config = {'return_value.json.side_effect': [
             cls.org_payload, cls.repos_payload,
-            cls.repos_payload,cls.repos_payload
+            cls.repos_payload, cls.repos_payload
         ]}
         cls.get_patcher = patch('requests.get', **config)
         cls.mock_get = cls.get_patcher.start()
 
     def test_public_repos(self):
         """Test public repos"""
+        test = GithubOrgClient('google')
+        self.assertEqual(test.public_repos(), self.expected_repos)
+        self.assertEqual(test.repos_payload, self.repos_payload)
+        self.assertEqual(test.public_repos("XLICENSE"), [])
+        self.mock_get.assert_called()
+
+    def test_public_repos_with_license(self):
+        """Test public repos with license"""
         test = GithubOrgClient('google')
         self.assertEqual(test.public_repos(), self.expected_repos)
         self.assertEqual(test.public_repos("XLICENSE"), [])
