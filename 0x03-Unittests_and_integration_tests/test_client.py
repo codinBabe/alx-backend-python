@@ -6,7 +6,6 @@ from unittest.mock import patch, PropertyMock, Mock
 from client import GithubOrgClient
 from parameterized import parameterized, parameterized_class
 from fixtures import TEST_PAYLOAD
-import json
 
 
 class TestGithubOrgClient(unittest.TestCase):
@@ -92,6 +91,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
     def test_public_repos_with_license(self):
         """Test public repos with license"""
         test = GithubOrgClient('google')
+
         self.assertEqual(test.public_repos(), self.expected_repos)
         self.assertEqual(test.public_repos("XLICENSE"), [])
         self.assertEqual(test.public_repos(
