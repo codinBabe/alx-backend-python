@@ -23,7 +23,7 @@ class TestGithubOrgClient(unittest.TestCase):
 
     @patch('client.get_json')
     def test_public_repos_url(self, org_name, mock_get_json):
-        """Test that GithubOrgClient._public_repos_url 
+        """Test that GithubOrgClient._public_repos_url
         returns the correct value
         """
         GithubOrgClient(org_name)._public_repos_url
