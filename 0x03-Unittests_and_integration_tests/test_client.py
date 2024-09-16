@@ -8,6 +8,7 @@ from parameterized import parameterized, parameterized_class
 from fixtures import TEST_PAYLOAD
 
 
+
 class TestGithubOrgClient(unittest.TestCase):
     """TestGithubOrgClient class to test GithubOrgClient class"""
 
@@ -75,7 +76,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         """Set up class"""
         config = {'return_value.json.side_effect': [
             cls.org_payload, cls.repos_payload,
-            cls.repos_payload, cls.repos_payload
+            cls.org_payload, cls.repos_payload
         ]}
         cls.get_patcher = patch('requests.get', **config)
         cls.mock_get = cls.get_patcher.start()
@@ -96,7 +97,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         self.assertEqual(test.public_repos("XLICENSE"), [])
         self.assertEqual(test.public_repos(
             "apache-2.0"), self.apache2_repos)
-        self.mock.assert_called()
+        self.mock_get.assert_called()
 
     @classmethod
     def tearDownClass(cls):
