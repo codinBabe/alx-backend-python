@@ -18,15 +18,17 @@ class TestGithubOrgClient(unittest.TestCase):
     def test_org(self, org_name, mock_get_json):
         """Test that GithubOrgClient.org returns the correct value"""
         GithubOrgClient(org_name).org()
-        mock_get_json.assert_called_once_with(f"https://api.github.com/orgs/{org_name}")
-
+        mock_get_json.assert_called_once_with(
+            f"https://api.github.com/orgs/{org_name}")
 
     @patch('client.get_json')
     def test_public_repos_url(self, org_name, mock_get_json):
-        """Test that GithubOrgClient._public_repos_url returns the correct value"""
+        """Test that GithubOrgClient._public_repos_url 
+        returns the correct value
+        """
         GithubOrgClient(org_name)._public_repos_url
-        mock_get_json.assert_called_once_with(f"https://api.github.com/orgs/{org_name}")
-
+        mock_get_json.assert_called_once_with(
+            f"https://api.github.com/orgs/{org_name}")
 
     @patch('client.get_json')
     def test_public_repos(self, mock_get_json):
@@ -44,7 +46,6 @@ class TestGithubOrgClient(unittest.TestCase):
 
             mock_public_repos_url.assert_called_once()
             mock_get_json.assert_called_once_with()
-
 
     @parameterized.expand([
         ({"license": {"key": "my_license"}}, "my_license", True),
