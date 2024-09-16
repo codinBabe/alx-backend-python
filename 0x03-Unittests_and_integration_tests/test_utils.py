@@ -19,12 +19,12 @@ class TestAccessNestedMap(unittest.TestCase):
         self.assertEqual(access_nested_map(nested_map, path), expected)
 
     @parameterized.expand([
-        ({}, ("a",), "a"),
-        ({"a": 1}, ("a", "b"), "b")
+        ({}, ("a",), KeyError),
+        ({"a": 1}, ("a", "b"), KeyError),
     ])
     def test_access_nested_map_exception(self, nested_map, path, expected):
         """Test that the function raises the expected exception."""
-        with self.assertRaises(KeyError) as context:
+        with self.assertRaises(expected) as context:
             access_nested_map(nested_map, path)
         self.assertEqual(f"KeyError: ('{expected}')", repr(context.exception))
 
@@ -66,7 +66,8 @@ class TestMemoize(unittest.TestCase):
                 return self.a_method()
    
         with patch.object(TestClass, "a_method") as mock_a_method:
-            test_class = TestClass
-            test_class.a_property()
-            test_class.a_property()
+            mock_a_method.return_value = 42
+            test = TestClass()
+            self.assertEqual(test.a_property, 42)
+            self.assertEqual(test.a_property, 42)
             mock_a_method.assert_called_once()
