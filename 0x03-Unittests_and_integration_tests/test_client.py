@@ -20,7 +20,7 @@ class TestGithubOrgClient(unittest.TestCase):
         GithubOrgClient(org_name).org()
         mock_get_json.assert_called_once_with(f"https://api.github.com/orgs/{org_name}")
 
-    
+
 
     @patch('client.get_json')
     def test_public_repos_url(self, org_name, mock_get_json):
